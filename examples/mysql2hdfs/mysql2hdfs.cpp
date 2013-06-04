@@ -516,9 +516,11 @@ int main(int argc, char** argv)
   parse_args(&argc, argv, &mysql_uri, &hdfs_uri);
   parse_hdfs_url(hdfs_uri.c_str(), strlen(hdfs_uri.c_str()),
                  &hdfs_host, &hdfs_user, &hdfs_port);
-
+// cycker: binary_log 是读取BINLOG的CLASS
   Binary_log binlog(create_transport(mysql_uri.c_str()));
-  cout << "The default data warehouse directory"
+
+  //设置目标路径  data_dir_path
+ cout << "The default data warehouse directory"
        << " in HDFS will be set to /usr/hive/warehouse"
        << endl;
   cout << "Change the default data warehouse directory? (Y or N) ";

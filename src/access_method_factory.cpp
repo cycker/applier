@@ -67,6 +67,7 @@ static Binary_log_driver *parse_mysql_url(const char *body, size_t len)
     host_end = body + len;
   assert(host_end - host >= 1);              // There has to be a host
 
+  //ok
   /* Find the port number */
   uint portno = 3306;
   if (*host_end == ':')

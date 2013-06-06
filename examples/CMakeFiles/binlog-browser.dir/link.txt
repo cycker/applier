@@ -1,0 +1,1 @@
+/usr/bin/c++       CMakeFiles/binlog-browser.dir/binlog-browser.cpp.o  -o binlog-browser  -L/home/hduser/applier/applier/lib -rdynamic ../lib/libreplication.a -lmysqlclient -lcrypto -Wl,-rpath,/home/hduser/applier/applier/lib 

@@ -1,0 +1,1 @@
+/usr/bin/c++       CMakeFiles/test-transport.dir/test-transport.cpp.o  -o test-transport  -L/home/hduser/applier/applier/lib -rdynamic ../lib/libreplication.a ../lib/libgtest.a -lmysqlclient -lcrypto -Wl,-rpath,/home/hduser/applier/applier/lib 

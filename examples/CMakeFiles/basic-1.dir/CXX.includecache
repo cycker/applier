@@ -1,0 +1,12 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/hduser/applier/applier/examples/basic-1.cpp
+binlog_api.h
+/home/hduser/applier/applier/examples/binlog_api.h
+

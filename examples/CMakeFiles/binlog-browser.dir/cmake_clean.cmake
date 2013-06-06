@@ -1,0 +1,10 @@
+FILE(REMOVE_RECURSE
+  "CMakeFiles/binlog-browser.dir/binlog-browser.cpp.o"
+  "binlog-browser.pdb"
+  "binlog-browser"
+)
+
+# Per-language clean rules from dependency scanning.
+FOREACH(lang CXX)
+  INCLUDE(CMakeFiles/binlog-browser.dir/cmake_clean_${lang}.cmake OPTIONAL)
+ENDFOREACH(lang)

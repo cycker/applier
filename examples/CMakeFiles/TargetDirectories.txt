@@ -1,0 +1,5 @@
+/home/hduser/applier/applier/examples/CMakeFiles/basic-1.dir
+/home/hduser/applier/applier/examples/CMakeFiles/basic-2.dir
+/home/hduser/applier/applier/examples/CMakeFiles/binlog-browser.dir
+/home/hduser/applier/applier/examples/mysql2hdfs/CMakeFiles/happlier.dir
+/home/hduser/applier/applier/examples/mysql2lucene/CMakeFiles/mysql2lucene.dir

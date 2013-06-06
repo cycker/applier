@@ -1,0 +1,1 @@
+/usr/bin/c++       CMakeFiles/test-basic.dir/test-basic.cpp.o  -o test-basic  -L/home/hduser/applier/applier/lib -rdynamic ../lib/libreplication.a ../lib/libgtest.a -lmysqlclient -lcrypto -Wl,-rpath,/home/hduser/applier/applier/lib 

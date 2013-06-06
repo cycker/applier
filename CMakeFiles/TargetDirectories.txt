@@ -1,0 +1,10 @@
+/home/hduser/applier/applier/examples/CMakeFiles/basic-1.dir
+/home/hduser/applier/applier/examples/CMakeFiles/basic-2.dir
+/home/hduser/applier/applier/examples/CMakeFiles/binlog-browser.dir
+/home/hduser/applier/applier/CMakeFiles/gtest.dir
+/home/hduser/applier/applier/examples/mysql2hdfs/CMakeFiles/happlier.dir
+/home/hduser/applier/applier/examples/mysql2lucene/CMakeFiles/mysql2lucene.dir
+/home/hduser/applier/applier/src/CMakeFiles/replication_shared.dir
+/home/hduser/applier/applier/src/CMakeFiles/replication_static.dir
+/home/hduser/applier/applier/tests/CMakeFiles/test-basic.dir
+/home/hduser/applier/applier/tests/CMakeFiles/test-transport.dir

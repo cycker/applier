@@ -1,0 +1,1 @@
+/usr/bin/c++       CMakeFiles/basic-2.dir/basic-2.cpp.o  -o basic-2  -L/home/hduser/applier/applier/lib -rdynamic ../lib/libreplication.a -lmysqlclient -lcrypto -Wl,-rpath,/home/hduser/applier/applier/lib 

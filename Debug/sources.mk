@@ -25,7 +25,19 @@ C_UPPER_DEPS :=
 SUBDIRS := \
 tests \
 src \
+src/CMakeFiles/replication_shared.dir \
+source_downloads/gtest-1.5.0/xcode/Samples/FrameworkSample \
+source_downloads/gtest-1.5.0/test \
+source_downloads/gtest-1.5.0/src \
+source_downloads/gtest-1.5.0/samples \
+source_downloads/gtest-1.5.0/fused-src/gtest \
+source_downloads/gtest-1.5.0/codegear \
 examples/mysql2lucene \
 examples/mysql2hdfs \
 examples \
+examples/CMakeFiles/2.8.10.1/CompilerIdCXX \
+examples/CMakeFiles/2.8.10.1/CompilerIdC \
+CMakeFiles/gtest.dir/source_downloads/gtest-1.5.0/src \
+CMakeFiles/2.8.10.1/CompilerIdCXX \
+CMakeFiles/2.8.10.1/CompilerIdC \
 

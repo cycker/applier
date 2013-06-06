@@ -3,24 +3,21 @@
 ################################################################################
 
 # Add inputs and outputs from these tool invocations to the build variables 
-CPP_SRCS += \
-../examples/basic-1.cpp \
-../examples/basic-2.cpp \
-../examples/binlog-browser.cpp 
+CC_SRCS += \
+../source_downloads/gtest-1.5.0/fused-src/gtest/gtest-all.cc \
+../source_downloads/gtest-1.5.0/fused-src/gtest/gtest_main.cc 
 
 OBJS += \
-./examples/basic-1.o \
-./examples/basic-2.o \
-./examples/binlog-browser.o 
+./source_downloads/gtest-1.5.0/fused-src/gtest/gtest-all.o \
+./source_downloads/gtest-1.5.0/fused-src/gtest/gtest_main.o 
 
-CPP_DEPS += \
-./examples/basic-1.d \
-./examples/basic-2.d \
-./examples/binlog-browser.d 
+CC_DEPS += \
+./source_downloads/gtest-1.5.0/fused-src/gtest/gtest-all.d \
+./source_downloads/gtest-1.5.0/fused-src/gtest/gtest_main.d 
 
 
 # Each subdirectory must supply rules for building sources it contributes
-examples/%.o: ../examples/%.cpp
+source_downloads/gtest-1.5.0/fused-src/gtest/%.o: ../source_downloads/gtest-1.5.0/fused-src/gtest/%.cc
 	@echo 'Building file: $<'
 	@echo 'Invoking: Cross G++ Compiler'
 	g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -o "$@" "$<"

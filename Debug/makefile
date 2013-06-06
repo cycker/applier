@@ -9,10 +9,22 @@ RM := rm -rf
 # All of the sources participating in the build are defined here
 -include sources.mk
 -include tests/subdir.mk
+-include src/CMakeFiles/replication_shared.dir/subdir.mk
 -include src/subdir.mk
+-include source_downloads/gtest-1.5.0/xcode/Samples/FrameworkSample/subdir.mk
+-include source_downloads/gtest-1.5.0/test/subdir.mk
+-include source_downloads/gtest-1.5.0/src/subdir.mk
+-include source_downloads/gtest-1.5.0/samples/subdir.mk
+-include source_downloads/gtest-1.5.0/fused-src/gtest/subdir.mk
+-include source_downloads/gtest-1.5.0/codegear/subdir.mk
 -include examples/mysql2lucene/subdir.mk
 -include examples/mysql2hdfs/subdir.mk
+-include examples/CMakeFiles/2.8.10.1/CompilerIdCXX/subdir.mk
+-include examples/CMakeFiles/2.8.10.1/CompilerIdC/subdir.mk
 -include examples/subdir.mk
+-include CMakeFiles/gtest.dir/source_downloads/gtest-1.5.0/src/subdir.mk
+-include CMakeFiles/2.8.10.1/CompilerIdCXX/subdir.mk
+-include CMakeFiles/2.8.10.1/CompilerIdC/subdir.mk
 -include subdir.mk
 -include objects.mk
 

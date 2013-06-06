@@ -3,27 +3,21 @@
 ################################################################################
 
 # Add inputs and outputs from these tool invocations to the build variables 
-CPP_SRCS += \
-../examples/basic-1.cpp \
-../examples/basic-2.cpp \
-../examples/binlog-browser.cpp 
+C_SRCS += \
+../CMakeFiles/2.8.10.1/CompilerIdC/CMakeCCompilerId.c 
 
 OBJS += \
-./examples/basic-1.o \
-./examples/basic-2.o \
-./examples/binlog-browser.o 
+./CMakeFiles/2.8.10.1/CompilerIdC/CMakeCCompilerId.o 
 
-CPP_DEPS += \
-./examples/basic-1.d \
-./examples/basic-2.d \
-./examples/binlog-browser.d 
+C_DEPS += \
+./CMakeFiles/2.8.10.1/CompilerIdC/CMakeCCompilerId.d 
 
 
 # Each subdirectory must supply rules for building sources it contributes
-examples/%.o: ../examples/%.cpp
+CMakeFiles/2.8.10.1/CompilerIdC/%.o: ../CMakeFiles/2.8.10.1/CompilerIdC/%.c
 	@echo 'Building file: $<'
-	@echo 'Invoking: Cross G++ Compiler'
-	g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -o "$@" "$<"
+	@echo 'Invoking: Cross GCC Compiler'
+	gcc -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -o "$@" "$<"
 	@echo 'Finished building: $<'
 	@echo ' '
 

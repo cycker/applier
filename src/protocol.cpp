@@ -331,6 +331,7 @@ Format_event *proto_format_desc_event(std::istream &is, Log_event_header *header
   */
   fdev->post_header_len.insert(fdev->post_header_len.begin(), 0);
   trim2(fdev->master_version);
+  fdev->print_event_info(std::cout);
   return fdev;
 
 }

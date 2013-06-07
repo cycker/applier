@@ -45,6 +45,7 @@ enum Log_event_type
   /*
     Every time you update this enum (when you add a type), you have to
     fix Format_description_log_event::Format_description_log_event().
+
   */
   UNKNOWN_EVENT= 0,
   START_EVENT_V3= 1,

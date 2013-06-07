@@ -17,10 +17,51 @@ basic_content_handler.cpp
 file_driver.cpp
 row_of_fields.cpp
 
+Unknown= 0
+Start_v3= 56
+Query= 13
+Stop= 0
+Rotate= 8
+Intvar= 0
+Load= 18
+Slave= 0
+Create_file= 4
+Append_block= 4
+Exec_load= 4
+Delete_file= 4
+New_load= 18
+RAND= 0
+User var= 0
+Format_desc= 92
+Xid= 0
+Begin_load_query= 4
+Execute_load_query= 26
+Table_map= 8
+Write_rows_event_old= 0
+Update_rows_event_old= 0
+Delete_rows_event_old= 0
+Write_rows_v1= 8
+Update_rows_v1= 8
+Delete_rows_v1= 8
+Incident= 2
+Heartbeat= 0
+Ignorable= 0
+Rows_query= 0
+Write_rows= 10
+Update_rows= 10
+Delete_rows= 10
+Gtid= 25
+Anonymous_Gtid= 25
+Previous_gtids= 0
+User defined= 0
+Unknown= 165
+Unknown= 235
+Unknown= 172
+Unknown= 187
 
 
 binlog format 
-
+标准头部
 Protocol_chunk<uint32_t> prot_timestamp(m_event_log_header.timestamp);
 Protocol_chunk<uint8_t>  prot_type_code(m_event_log_header.type_code);
 Protocol_chunk<uint32_t> prot_server_id(m_event_log_header.server_id);
@@ -28,11 +69,23 @@ Protocol_chunk<uint32_t> prot_event_length(m_event_log_header.event_length);
 Protocol_chunk<uint32_t> prot_next_position(m_event_log_header.next_position);
 Protocol_chunk<uint16_t> prot_flags(m_event_log_header.flags);
 
-DESC
+DESC 15 proto_format_desc_event
 Protocol_chunk<uint16_t> proto_format_event_binlog_version(fdev->binlog_version);
 Protocol_chunk_string proto_format_event_master_version(fdev->master_version, 50);
 Protocol_chunk<uint32_t> proto_format_event_created_ts(fdev->created_ts);
 Protocol_chunk<uint8_t> proto_format_event_header_len(fdev->log_header_len);
 Protocol_chunk_vector proto_format_event_post_header(fdev->post_header_len, event_length - 76);
  
+rows event
+Protocol_chunk<uint8_t>  proto_table_id(&table_id.bytes[0], 6);
+Protocol_chunk<uint16_t> proto_flags(rev->flags);
+
+//if not V1
+Protocol_chunk<uint16_t> proto_var_header_len(rev->var_header_len);
+Protocol_chunk_vector proto_extra_header_data(rev->extra_header_data, rev->var_header_len - 2);
+
+Protocol_chunk<uint64_t> proto_column_len(rev->columns_len);
+Protocol_chunk_vector proto_used_columns(rev->used_columns, used_column_len);
+
+
         

@@ -157,6 +157,7 @@ void Format_event::print_long_info(std::ostream& info)
     event_type= static_cast<Log_event_type>(i);
     info << mysql::system::get_event_type_str(event_type)
          << "= "
+         << post_header_len[i] << " = "
          << (int)post_header_len[static_cast<Log_event_type>(i)]
          <<  "\n";
   }

@@ -49,8 +49,9 @@ int main(int argc, char** argv) {
     int result = binlog.wait_for_next_event(&event);
     if (result != ERR_OK)
       break;
-    std::cout << "Found event of type "
+   /* std::cout << "Found event of type "
               << event->get_event_type()
               << std::endl;
+  */
   }
 }

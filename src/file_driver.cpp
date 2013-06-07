@@ -195,6 +195,14 @@ using namespace std;
                       >> prot_next_position
                       >> prot_flags;
 
+        std::cout << "read event timestamp " << prot_timestamp << "\n"
+        		 << "read event prot_type_code " << prot_type_code << "\n"
+        		 << "read event prot_server_id " << prot_server_id << "\n"
+        		 << "read event prot_event_length " << prot_event_length << "\n"
+        		 << "read event prot_next_position " << prot_next_position << "\n"
+        		 << "read event prot_flags " << prot_flags << "\n";
+
+
         /*
         m_binlog_file.read(reinterpret_cast<char*>
                            (&m_event_log_header.timestamp),sizeof(uint32_t));

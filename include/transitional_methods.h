@@ -70,6 +70,7 @@ inline void do_server_version_split(const char *version, uchar split_versions[3]
 
 inline ulong version_product(const uchar* version_split)
 {
+
   return ((version_split[0] * 256 + version_split[1]) * 256
           + version_split[2]);
 }

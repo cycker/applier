@@ -44,6 +44,7 @@ int check_checksum_value(mysql::Binary_log_event **event)
 
   uchar version_split[3];
   do_server_version_split((fdev->master_version).c_str(), version_split);
+
   if (version_product(version_split) >= checksum_version_product)
   {
     /*

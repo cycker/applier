@@ -238,6 +238,7 @@ using namespace std;
           {
             // Check server version and the checksum value
             int ret= check_checksum_value(event);
+            return ERR_OK;
             return ret; // ret is the error code
           }
         }

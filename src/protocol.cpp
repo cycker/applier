@@ -45,11 +45,14 @@ int check_checksum_value(mysql::Binary_log_event **event)
   uchar version_split[3];
   do_server_version_split((fdev->master_version).c_str(), version_split);
 
+  /*cycker 这里有问题。5.6.10检测通不过
+   * checksum_version_product:只支持5.6.1以上*/
   if (version_product(version_split) >= checksum_version_product)
   {
     /*
       Last four bytes is the check sum value which is to be removed
       from post_header_len.
+      vector->erase (a,b)删除[a,b)元素
     */
     fdev->post_header_len.erase(fdev->post_header_len.end() -
                                 BINLOG_CHECKSUM_LEN,
@@ -332,7 +335,7 @@ Format_event *proto_format_desc_event(std::istream &is, Log_event_header *header
   */
   fdev->post_header_len.insert(fdev->post_header_len.begin(), 0);
   trim2(fdev->master_version);
-  fdev->print_event_info(std::cout);
+
   return fdev;
 
 }

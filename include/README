@@ -4,7 +4,7 @@ basic_transaction_parser.cpp
 binlog_driver.cpp
 tcp_driver.cpp
 
-binlog_event.cpp
+binlog_event.cpp .h 定义各种Log_event_type
 binary_log.cpp
 cmake_install.cmake
 value.cpp
@@ -12,7 +12,27 @@ Makefile
 resultset_iterator.cpp
 field_iterator.cpp
 utilities.cpp
-protocol.cpp
+protocol.cpp           解析EVENT的代码都在这里 
 basic_content_handler.cpp
 file_driver.cpp
 row_of_fields.cpp
+
+
+
+binlog format 
+
+Protocol_chunk<uint32_t> prot_timestamp(m_event_log_header.timestamp);
+Protocol_chunk<uint8_t>  prot_type_code(m_event_log_header.type_code);
+Protocol_chunk<uint32_t> prot_server_id(m_event_log_header.server_id);
+Protocol_chunk<uint32_t> prot_event_length(m_event_log_header.event_length);
+Protocol_chunk<uint32_t> prot_next_position(m_event_log_header.next_position);
+Protocol_chunk<uint16_t> prot_flags(m_event_log_header.flags);
+
+DESC
+Protocol_chunk<uint16_t> proto_format_event_binlog_version(fdev->binlog_version);
+Protocol_chunk_string proto_format_event_master_version(fdev->master_version, 50);
+Protocol_chunk<uint32_t> proto_format_event_created_ts(fdev->created_ts);
+Protocol_chunk<uint8_t> proto_format_event_header_len(fdev->log_header_len);
+Protocol_chunk_vector proto_format_event_post_header(fdev->post_header_len, event_length - 76);
+ 
+        

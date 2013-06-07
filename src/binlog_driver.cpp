@@ -67,7 +67,8 @@ Binary_log_event* Binary_log_driver::parse_event(std::istream &is,
         parsed_event= new Unknown_event(header);
       }
   }
-
+//  parsed_event->print_event_info(std::cout);
+ // parsed_event->print_long_info(std::cout);
   return parsed_event;
 }
 

@@ -234,6 +234,9 @@ using namespace std;
 
         if(*event)
         {
+          (*event)->print_event_info(std::cout);
+          (*event)->print_long_info(std::cout);
+
           if ((*event)->header()->type_code == mysql::FORMAT_DESCRIPTION_EVENT)
           {
             // Check server version and the checksum value

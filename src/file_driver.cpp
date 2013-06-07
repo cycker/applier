@@ -65,7 +65,7 @@ using namespace std;
         if (m_event_log_header.type_code != mysql::FORMAT_DESCRIPTION_EVENT)
           return ERR_BINLOG_VERSION;
       }
-
+      m_binlog_file.seekg(MAGIC_NUMBER_SIZE, ios::beg );
     } catch (...)
     {
       return ERR_FAIL;

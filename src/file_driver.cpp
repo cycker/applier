@@ -194,10 +194,19 @@ using namespace std;
                       >> prot_event_length
                       >> prot_next_position
                       >> prot_flags;
-/*
-        std::cout << "read event timestamp " << prot_timestamp << "\n"
-        		 << "read event prot_type_code " << prot_type_code << "\n"
-        		 << "read event prot_server_id " << prot_server_id << "\n"
+
+        /*
+        Log_event_type event_type = static_cast<Log_event_type>(m_event_log_header.type_code);
+        std::cout << "\nread event timestamp " << m_event_log_header.timestamp
+        		<< " pos " <<  m_event_log_header.next_position
+        		<< " event type " << mysql::system::get_event_type_str(event_type)
+        		<< "\n";
+*/
+
+
+
+        		 /*
+        		  *        		 << "read event prot_server_id " << prot_server_id << "\n"
         		 << "read event prot_event_length " << prot_event_length << "\n"
         		 << "read event prot_next_position " << prot_next_position << "\n"
         		 << "read event prot_flags " << prot_flags << "\n";
@@ -234,10 +243,19 @@ using namespace std;
 
         if(*event)
         {
+          std::cout << "\nNEW event type: " <<
+        		  mysql::system::get_event_type_str(
+        				  static_cast<Log_event_type>((*event)->header()->type_code)
+        			  )
+          	  	  << " len:" << (*event)->header()->event_length
+          	  	  << "\n";
+
+          (*event)->print_event_info(std::cout);
           (*event)->print_long_info(std::cout);
 
           if ((*event)->header()->type_code == mysql::FORMAT_DESCRIPTION_EVENT)
           {
+        	 // (*event)->print_long_info(std::cout);
             // Check server version and the checksum value
             int ret= check_checksum_value(event);
             return ERR_OK;

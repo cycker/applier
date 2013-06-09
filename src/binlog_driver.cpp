@@ -61,6 +61,9 @@ Binary_log_event* Binary_log_driver::parse_event(std::istream &is,
     case USER_VAR_EVENT:
       parsed_event= proto_uservar_event(is, header);
       break;
+    case XID_EVENT:
+         parsed_event= proto_xid_event(is, header);
+         break;
     default:
       {
         // Create a dummy driver.

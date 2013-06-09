@@ -30,23 +30,23 @@ namespace system {
 const char *get_event_type_str(Log_event_type type)
 {
   switch(type) {
-  case START_EVENT_V3:  return "Start_v3";
-  case STOP_EVENT:   return "Stop";
-  case QUERY_EVENT:  return "Query";
-  case ROTATE_EVENT: return "Rotate";
-  case INTVAR_EVENT: return "Intvar";
-  case LOAD_EVENT:   return "Load";
-  case NEW_LOAD_EVENT:   return "New_load";
-  case SLAVE_EVENT:  return "Slave";
-  case CREATE_FILE_EVENT: return "Create_file";
-  case APPEND_BLOCK_EVENT: return "Append_block";
-  case DELETE_FILE_EVENT: return "Delete_file";
-  case EXEC_LOAD_EVENT: return "Exec_load";
-  case RAND_EVENT: return "RAND";
-  case XID_EVENT: return "Xid";
-  case USER_VAR_EVENT: return "User var";
-  case FORMAT_DESCRIPTION_EVENT: return "Format_desc";
-  case TABLE_MAP_EVENT: return "Table_map";
+  case START_EVENT_V3:  return "START_EVENT_V3";
+  case STOP_EVENT:   return "STOP_EVENT";
+  case QUERY_EVENT:  return "QUERY_EVENT";
+  case ROTATE_EVENT: return "ROTATE_EVENT";
+  case INTVAR_EVENT: return "INTVAR_EVENT";
+  case LOAD_EVENT:   return "LOAD_EVENT";
+  case NEW_LOAD_EVENT:   return "NEW_LOAD_EVENT";
+  case SLAVE_EVENT:  return "SLAVE_EVENT";
+  case CREATE_FILE_EVENT: return "CREATE_FILE_EVENT";
+  case APPEND_BLOCK_EVENT: return "APPEND_BLOCK_EVENT";
+  case DELETE_FILE_EVENT: return "DELETE_FILE_EVENT";
+  case EXEC_LOAD_EVENT: return "EXEC_LOAD_EVENT";
+  case RAND_EVENT: return "RAND_EVENT";
+  case XID_EVENT: return "XID_EVENT";
+  case USER_VAR_EVENT: return "USER_VAR_EVENT";
+  case FORMAT_DESCRIPTION_EVENT: return "FORMAT_DESCRIPTION_EVENT";
+  case TABLE_MAP_EVENT: return "TABLE_MAP_EVENT";
   case PRE_GA_WRITE_ROWS_EVENT: return "Write_rows_event_old";
   case PRE_GA_UPDATE_ROWS_EVENT: return "Update_rows_event_old";
   case PRE_GA_DELETE_ROWS_EVENT: return "Delete_rows_event_old";
@@ -95,7 +95,7 @@ void Binary_log_event::print_long_info(std::ostream& info) {}
 
 void Unknown_event::print_event_info(std::ostream& info)
 {
-  info << "Unhandled event";
+  info << " Unhandled event";
 }
 
 void Unknown_event::print_long_info(std::ostream& info)
@@ -111,54 +111,61 @@ void Query_event::print_event_info(std::ostream& info)
   {
     info << "use `" << db_name << "`; ";
   }
-  info << query;
+  info << "SQL:'" << query << "'\n";
 }
 
 void Query_event::print_long_info(std::ostream& info)
 {
-  info << "Timestamp: " << this->header()->timestamp;
+  this->print_event_header(info);
+  info << " Timestamp: " << this->header()->timestamp;
   info << "\tThread id: " << (int)thread_id;
   info << "\tExec time: " << (int)exec_time;
   info << "\nDatabase: " << db_name;
   info << "\tQuery: ";
   this->print_event_info(info);
+  info << "Event END\n\n";
 }
 
 void Rotate_event::print_event_info(std::ostream& info)
 {
+
   info << "Binlog Position: " << binlog_pos;
   info << ", Log name: " << binlog_file;
 }
 
 void Rotate_event::print_long_info(std::ostream& info)
 {
+  this->print_event_header(info);
   info << "Timestamp: " << this->header()->timestamp;
   info << "\t";
   this->print_event_info(info);
+  info << "\n";
 }
 
 void Format_event::print_event_info(std::ostream& info)
 {
+
   info << "Server ver: " << master_version;
   info << ", Binlog ver: " << binlog_version;
 }
 
 void Format_event::print_long_info(std::ostream& info)
 {
-  Log_event_type event_type;
+  Log_event_type event_type;// a ENUM
   int enum_index= 1;
+  this->print_event_header(info);
   this->print_event_info(info);
   info << "\nCreated timestamp: " << created_ts;
   info << "\tCommon Header Length: " << (int)log_header_len;
-  info << "\nPost header length for events: \n";
+  info << "\nevent_num\tLength\tevent_type\n";
 
   for (int i= 0; i < post_header_len.size(); i++)
   {
-    event_type= static_cast<Log_event_type>(i);
-    info << mysql::system::get_event_type_str(event_type)
-         << "= "
-         << post_header_len[i] << " = "
+    event_type= static_cast<Log_event_type>(i); // cast int to enum
+    info << event_type  << "\t"
          << (int)post_header_len[static_cast<Log_event_type>(i)]
+         << "\t"
+         << mysql::system::get_event_type_str(event_type)
          <<  "\n";
   }
 }
@@ -191,7 +198,7 @@ void Table_map_event::print_event_info(std::ostream& info)
 
 void Table_map_event::print_long_info(std::ostream& info)
 {
-  info << "Timestamp: " << this->header()->timestamp;
+  info << " Timestamp: " << this->header()->timestamp;
   info << "\tFlags: " << flags;
   info << "\tColumn Type: ";
   /**
@@ -215,7 +222,7 @@ void Row_event::print_event_info(std::ostream& info)
 
 void Row_event::print_long_info(std::ostream& info)
 {
-  info << "Timestamp: " << this->header()->timestamp;
+  info << " Timestamp: " << this->header()->timestamp;
   info << "\n";
   this->print_event_info(info);
 
@@ -223,17 +230,24 @@ void Row_event::print_long_info(std::ostream& info)
   if (this->get_event_type() == PRE_GA_WRITE_ROWS_EVENT ||
       this->get_event_type() == WRITE_ROWS_EVENT_V1 ||
       this->get_event_type() == WRITE_ROWS_EVENT)
-    info << "\nType: Insert" ;
+    info << "\nType: Insert " ;
+
 
   if (this->get_event_type() == PRE_GA_DELETE_ROWS_EVENT ||
       this->get_event_type() == DELETE_ROWS_EVENT_V1 ||
       this->get_event_type() == DELETE_ROWS_EVENT)
-    info << "\nType: Delete" ;
+    info << "\nType: Delete " ;
 
   if (this->get_event_type() == PRE_GA_UPDATE_ROWS_EVENT ||
       this->get_event_type() == UPDATE_ROWS_EVENT_V1 ||
       this->get_event_type() == UPDATE_ROWS_EVENT)
-    info << "\nType: Update" ;
+    info << "\nType: Update " ;
+
+  info <<"row.size:" <<  row.size() << ":";
+  for ( int i = 0; i < row.size(); i++) {
+              info <<  static_cast<unsigned char>(row[i]) << " ";
+  }
+  info << "\n";
 }
 
 void Int_var_event::print_event_info(std::ostream& info)
@@ -262,7 +276,7 @@ void Incident_event::print_long_info(std::ostream& info)
 void Xid::print_event_info(std::ostream& info)
 {
   //TODO: Write process_event function for Xid events
-  info << "Xid ID=" << xid_id;
+  info << "Xid ID=" << xid_id << "\n";
 }
 
 void Xid::print_long_info(std::ostream& info)

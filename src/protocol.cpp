@@ -416,6 +416,17 @@ Rotate_event *proto_rotate_event(std::istream &is, Log_event_header *header)
   return rev;
 }
 
+Xid  *proto_xid_event(std::istream &is, Log_event_header *header)
+{
+
+
+  Xid  *rev= new Xid (header);
+  Protocol_chunk<uint64_t > prot_xid (rev->xid_id);
+  is >> prot_xid ;
+
+  return rev;
+}
+
 Incident_event *proto_incident_event(std::istream &is,
                                      Log_event_header *header)
 {
@@ -495,7 +506,7 @@ Row_event *proto_rows_event(std::istream &is, Log_event_header *header)
   ulong row_len= header->event_length - bytes_read - LOG_EVENT_HEADER_SIZE + 1;
   Protocol_chunk_vector proto_row(rev->row, row_len);
   is >> proto_row;
-
+//the row is here row event -> row, -> columns_before_image
   return rev;
 }
 
@@ -564,7 +575,6 @@ Table_map_event *proto_table_map_event(std::istream &is,
   Protocol_chunk_string_len proto_table_name(tmev->table_name);
   Protocol_chunk<uint64_t> proto_columns_len(columns_len);
   proto_columns_len.set_length_encoded_binary(true);
-
   is >> proto_table_id
      >> proto_flags
      >> proto_db_name
